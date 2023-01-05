@@ -34,7 +34,7 @@ Section:Check({
          Tower:InvokeServer("Towers", {amount = 100})
          task.wait(3)
 
-         for i = 1, 4 do
+         for i = 1, 1 do
             Interact:InvokeServer("Towers", "Click", {row = i, val = 1})
             task.wait(0.1)
          end
