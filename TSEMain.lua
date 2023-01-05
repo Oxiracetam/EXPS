@@ -30,7 +30,7 @@ General:CreateToggle("Auto Games", function(value)
          task.wait(1)
          local x2 = tokens.Value
          if x2 == x1 then
-            error("No Cash out")
+            print("No Cash out")
          elseif x2 > x1 then
             warn("Cashed out $" .. (x2 - x1))
          end
@@ -92,7 +92,7 @@ Test:CreateButton("Cash Out", function()
    task.wait(1)
    local x2 = tokens.Value
          if x2 == x1 then
-            error("No Cash out")
+            print("No Cash out")
          elseif x2 > x1 then
             warn("Cashed out $" .. (x2 - x1))
          end
