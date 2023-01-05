@@ -38,7 +38,7 @@ General:CreateToggle("Auto Games", function(value)
    end
 end)
 
-General:CreateSlider("Slider", 1, 8, 4, false, function(value)
+General:CreateSlider("Slider", 0, 8, 4, false, function(value)
    print(value)
 end)
 
