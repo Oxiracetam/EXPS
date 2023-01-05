@@ -78,12 +78,12 @@ local Test = Window:NewSection("Test")
 local xx = 1
 local yy = 1
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
-Test:CreateButton("Test Tower", function()
-   Interact:InvokeServer("Towers", "Click", {row = yy, val = xx})
-end)
-
 Test:CreateButton("Start Tower Game", function()
    Gamestart:InvokeServer("Towers", {amount = 100})
+end)
+
+Test:CreateButton("Test Tower", function()
+   Interact:InvokeServer("Towers", "Click", {row = yy, val = xx})
 end)
 
 Test:CreateButton("Cash Out", function()
