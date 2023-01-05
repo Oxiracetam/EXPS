@@ -13,10 +13,10 @@ local Window = Library:NewWindow("Oxi's Trader")
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
-local General = Window:NewSection("Automation")
+local General = Window:NewSection("Auto Games")
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
-General:CreateToggle("Auto Games", function(value)
+General:CreateToggle("Auto", function(value)
    while value == true do
       if value == true then
          local x1 = tokens.Value
@@ -91,11 +91,11 @@ Test:CreateButton("Cash Out", function()
    Interact:InvokeServer("Towers", "Cashout")
    task.wait(1)
    local x2 = tokens.Value
-         if x2 == x1 then
-            print("No Cash out")
-         elseif x2 > x1 then
-            warn("Cashed out $" .. (x2 - x1))
-         end
+   if x2 == x1 then
+      print("No Cash out")
+   elseif x2 > x1 then
+      warn("Cashed out $" .. (x2 - x1))
+   end
 end)
 
 Test:CreateSlider("Tower", 1, 3, 1, false, function(value)
