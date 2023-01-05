@@ -24,18 +24,18 @@ Section:Check({
       local Tower = game.ReplicatedStorage.Remotes:WaitForChild("Game_Start")
       local Interact = game.ReplicatedStorage.Remotes:WaitForChild("Game_Interact")
 
-      while autogame do
+      while autogame == true1 do
          Tower:InvokeServer("Towers", {amount = 100})
          task.wait(3)
 
-         for i = 1, 4 do
+         for i = 1, rows do
             Interact:InvokeServer("Towers", "Click", {row = i, val = 1})
             task.wait(0.1)
          end
 
          Interact:InvokeServer("Towers", "Cashout")
          print("Cashed Out!")
-         task.wait(400)
+         task.wait(delg)
       end
    end
 })
