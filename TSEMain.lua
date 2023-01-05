@@ -45,9 +45,9 @@ Section:Slider({
    Minimum = 1,
    Default = 4,
    Maximum = 8,
-   Callback = function(n)
-      return n
-      print(n)
+   Callback = function(rows)
+      return rows
+      print(rows)
    end
 })
 
