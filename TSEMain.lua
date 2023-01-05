@@ -56,6 +56,7 @@ GeneralSection:AddSlider({
       print(Value)
       rows = Value
    end
+})
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 local MiscSectionR = GeneralTab:CreateSection({
    Name = "Misc",
