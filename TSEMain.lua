@@ -2,7 +2,7 @@ local Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/Oxira
 local Flags = Library.Flags
 
 local Window = Library:Window({
-   Text = "Oxi's Trader"
+   Text = "Console"
 })
 
 local Tab = Window:Tab({
@@ -122,7 +122,7 @@ Section2:Check({
 Section2:Button({
    Text = "Self Destruct",
    Callback = function(destruct)
-      Window:Destroy()
+      Tab:Destroy()
       script:Destroy()
    end
 })
