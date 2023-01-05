@@ -11,13 +11,14 @@ General:CreateToggle("Anti Afk", function(value)
       value = true
    elseif value == true then
       local vu = game:GetService("VirtualUser")
-      Remotes:WaitForChild("AFK"):Destroy()
       game:GetService("Players").LocalPlayer.Idled:connect(function()
 	      vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
 	      task.wait()
 	      vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
          warn("Saved AFK Kick")
       end)
+   elseif Remotes:WaitForChild("AFK") then
+      Remotes:WaitForChild("AFK"):Destroy()
    end
 end)
 
@@ -33,7 +34,7 @@ General:CreateToggle("Auto Games", function(value)
             task.wait(0.5)
          end
          Interact:InvokeServer("Towers", "Cashout")
-         print("Cashed Out!")
+         print("Attempted Cashed Out!")
          task.wait(delay)
       end
    end
