@@ -16,7 +16,7 @@ local Window = Library:NewWindow("Oxi's Trader")
 local General = Window:NewSection("Auto Games")
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
-General:CreateToggle("Auto", function(value)
+General:CreateToggle("Towers", function(value)
    while value == true do
       if value == true then
          local x1 = tokens.Value
@@ -27,6 +27,29 @@ General:CreateToggle("Auto", function(value)
             task.wait(1)
          end
          Interact:InvokeServer("Towers", "Cashout")
+         task.wait(1)
+         local x2 = tokens.Value
+         if x2 == x1 then
+            print("No Cash out")
+         elseif x2 > x1 then
+            warn("Cashed out $" .. (x2 - x1))
+         end
+         task.wait(delay)
+      end
+   end
+end)
+
+General:CreateToggle("Mines", function(value)
+   while value == true do
+      if value == true then
+         local x1 = tokens.Value
+         Gamestart:InvokeServer("Mines", {amount = 100})
+         task.wait(3)
+         for i = 1, 1 do
+            Interact:InvokeServer("Mines", "Click", {val = 21})
+            task.wait(1)
+         end
+         Interact:InvokeServer("Mines", "Cashout")
          task.wait(1)
          local x2 = tokens.Value
          if x2 == x1 then
