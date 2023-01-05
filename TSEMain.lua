@@ -6,7 +6,7 @@ local afkr = Remotes:WaitForChild("AFK")
 local player = game:WaitForChild("Players").LocalPlayer
 local tokens = player:WaitForChild("Tokens")
 local delay = 600
-local rows = 4
+local rows = 3
 
 local Window = Library:NewWindow("Oxi's Trader")
 
@@ -31,7 +31,7 @@ General:CreateToggle("Auto Games", function(value)
          local x2 = tokens.Value
          if x2 == x1 then
             print("No Cash out")
-         elseif x2 >> x1 then
+         elseif x2 > x1 then
             print("Cashed out!")
          end
          task.wait(delay)
@@ -39,7 +39,7 @@ General:CreateToggle("Auto Games", function(value)
    end
 end)
 
-General:CreateSlider("Rows", 1, 8, 4, false, function(value)
+General:CreateSlider("Rows", 1, 8, 3, false, function(value)
    rows = value
 end)
 
