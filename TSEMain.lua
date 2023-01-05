@@ -60,6 +60,16 @@ Section:Slider({
    end
 })
 
+Section2:Slider({
+   Text = "Pitch Offset",
+   Minimum = 100,
+   Default = 150,
+   Maximum = 500,
+   Callback = function(n)
+       warn(n)
+   end
+})
+
 SectionR:Check({
    Text = "Anti-AFK",
    Callback = function()
