@@ -15,13 +15,13 @@ General:CreateToggle("Anti Afk", function(value)
 	      task.wait()
 	      vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
       warn("Saved AFK Kick")
-      end
+      end)
    end
 end)
 
 
 General:CreateButton("Self Destruct", function()
-   Window:Destroy()
+   --Window:Destroy()
    warn("DESTRUCTED")
 end)
 
