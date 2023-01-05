@@ -123,6 +123,7 @@ Section2:Button({
    Text = "Self Destruct",
    Callback = function(destruct)
       Window:Destroy()
+      script:Destroy()
    end
 })
 
