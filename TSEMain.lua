@@ -53,8 +53,18 @@ GeneralSection:AddSlider({
    Min = 0,
    Max = 8,
    Format = function(Value)
-      print(Value)
       rows = Value
+   end
+})
+
+GeneralSection:AddSlider({
+   Name = "Delay",
+   Flag = "delay",
+   Value = 400,
+   Min = 0,
+   Max = 800,
+   Format = function(Value)
+      delay = Value
    end
 })
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
