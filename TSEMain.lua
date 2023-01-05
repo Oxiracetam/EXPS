@@ -1,9 +1,6 @@
 local Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/Oxiracetam/EXPS/main/HUD.lua'))()
 local Flags = Library.Flags
 
-local Window = Library:Window({
-   Text = "Console"
-})
 
 local Tab = Window:Tab({
    Text = "Trade Simulator PWN"
@@ -41,7 +38,7 @@ Section:Check({
 
          Interact:InvokeServer("Towers", "Cashout")
          print("Cashed Out!")
-         task.wait(rows)
+         task.wait(delg)
       end
    end
 })
@@ -124,6 +121,7 @@ Section2:Button({
    Callback = function(destruct)
       Tab:Destroy()
       script:Destroy()
+      warn("What are you talking about?")
    end
 })
 
