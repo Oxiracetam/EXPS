@@ -11,7 +11,7 @@ General:CreateToggle("Anti Afk", function(value)
    if value ~= true then
       value = true
    elseif value == true then
-      if afkr then
+      if afkr ~= nil then
          afkr:Destroy()
       end
       local vu = game:GetService("VirtualUser")
