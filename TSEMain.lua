@@ -7,25 +7,13 @@ local delay = 0
 local rows = 0
 
 local Window = Library:NewWindow("Oxi's Trader")
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------
 local General = Window:NewSection("Automation")
 
-General:CreateToggle("Anti Afk", function(value)
-   if value ~= true then
-      value = true
-   elseif value == true then
-      if afkr ~= nil then
-         afkr:Destroy()
-      end
-      local vu = game:GetService("VirtualUser")
-      game:GetService("Players").LocalPlayer.Idled:connect(function()
-	      vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
-	      task.wait()
-	      vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
-         warn("Saved AFK Kick")
-      end)
-   end
-end)
-
+------------------------------------------------------------------------------------------------------------------------------------------------------------
 General:CreateToggle("Auto Games", function(value)
    while value == true do
       if value == true then
@@ -50,7 +38,28 @@ General:CreateSlider("Delay (sec)", 1, 650, 600, false, function(value)
    delay = value
 end)
 
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+local Misc = Window:NewSection("Automation")
 
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+Misc:CreateToggle("Anti Afk", function(value)
+   if value ~= true then
+      value = true
+   elseif value == true then
+      if afkr ~= nil then
+         afkr:Destroy()
+      end
+      local vu = game:GetService("VirtualUser")
+      game:GetService("Players").LocalPlayer:WaitForChild("Idled"):connect(function()
+	      vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+	      task.wait()
+	      vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+         warn("Saved AFK Kick")
+      end)
+   end
+end)
 
 
 
@@ -59,27 +68,27 @@ end)
 
 --[[
 
-KillingCheats:CreateButton("Button", function()
+General:CreateButton("Button", function()
    print("HI")
 end)
 
-KillingCheats:CreateTextbox("TextBox", function(text)
+General:CreateTextbox("TextBox", function(text)
    print(text)
 end)
 
-KillingCheats:CreateToggle("Auto Ez", function(value)
+General:CreateToggle("Auto Ez", function(value)
    print(value)
 end)
 
-KillingCheats:CreateDropdown("DropDown", {"Hello", "World", "Hello World"}, 2, function(text)
+General:CreateDropdown("DropDown", {"Hello", "World", "Hello World"}, 2, function(text)
    print(text)
 end)
 
-KillingCheats:CreateSlider("Slider", 0, 100, 15, false, function(value)
+General:CreateSlider("Slider", 0, 100, 15, false, function(value)
    print(value)
 end)
 
-KillingCheats:CreateColorPicker("Picker", Color3.new(255, 255, 255), function(value)
+General:CreateColorPicker("Picker", Color3.new(255, 255, 255), function(value)
    print(value)
 end)
 
