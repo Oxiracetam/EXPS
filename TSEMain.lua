@@ -32,7 +32,7 @@ General:CreateToggle("Auto Games", function(value)
          if x2 == x1 then
             error("No Cash out")
          elseif x2 > x1 then
-            warn("Cashed out!")
+            warn("Cashed out $" .. (x2 - x1))
          end
          task.wait(delay)
       end
@@ -94,7 +94,7 @@ Test:CreateButton("Cash Out", function()
          if x2 == x1 then
             error("No Cash out")
          elseif x2 > x1 then
-            warn("Cashed out!")
+            warn("Cashed out $" .. (x2 - x1))
          end
 end)
 
