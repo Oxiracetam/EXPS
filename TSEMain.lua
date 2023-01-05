@@ -3,6 +3,8 @@ local Remotes = game.ReplicatedStorage.Remotes
 local Tower = Remotes:WaitForChild("Game_Start")
 local Interact = Remotes:WaitForChild("Game_Interact")
 local afkr = Remotes:WaitForChild("AFK")
+local player = game:WaitForChild("Players").LocalPlayer
+local tokens = player:WaitForChild("Tokens")
 local delay = 600
 local rows = 4
 
@@ -17,6 +19,7 @@ local General = Window:NewSection("Automation")
 General:CreateToggle("Auto Games", function(value)
    while value == true do
       if value == true then
+         local x1 = tokens.Value
          Tower:InvokeServer("Towers", {amount = 100})
          task.wait(3)
          for i = 1, rows do
@@ -24,7 +27,13 @@ General:CreateToggle("Auto Games", function(value)
             task.wait(1)
          end
          Interact:InvokeServer("Towers", "Cashout")
-         print("Attempted Cashed Out!")
+         task.wait(5)
+         local x2 = tokens.Value
+         if x2 == x1 then
+            print("No Cash out")
+         elseif x2 >> x1 then
+            print("Cashed out!")
+         end
          task.wait(delay)
       end
    end
@@ -60,6 +69,32 @@ Misc:CreateToggle("Anti Afk", function(value)
       end)
    end
 end)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
