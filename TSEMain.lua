@@ -1,9 +1,11 @@
 local Library = loadstring(Game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wizard"))()
 
+local delay = 0
+local rows = 0
+
 local Window = Library:NewWindow("Oxi's Trader")
 
 local General = Window:NewSection("Automation")
-
 
 General:CreateToggle("Anti Afk", function(value)
    if value ~= true then
@@ -38,8 +40,12 @@ General:CreateToggle("Auto Games", function(value)
    end
 end)
 
-General:CreateSlider("Slider", 0, 8, 4, false, function(value)
-   print(value)
+General:CreateSlider("Rows", 1, 8, 4, false, function(value)
+   rows = value
+end)
+
+General:CreateSlider("Delay", 1, 800, 400, false, function(value)
+   delay = value
 end)
 
 General:CreateButton("Self Destruct", function()
@@ -87,8 +93,6 @@ end)
 
 
 
-local delay = 0
-local rows = 0
 
 Section:Check({
    Text = "Auto Game",
