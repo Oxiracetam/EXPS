@@ -34,14 +34,14 @@ Section:Check({
          Tower:InvokeServer("Towers", {amount = 100})
          task.wait(3)
 
-         for i = 1, rows do
+         for i = 1, 4 do
             Interact:InvokeServer("Towers", "Click", {row = i, val = 1})
             task.wait(0.1)
          end
 
          Interact:InvokeServer("Towers", "Cashout")
          print("Cashed Out!")
-         task.wait(delg)
+         task.wait(400)
       end
    end
 })
@@ -53,6 +53,7 @@ Section:Slider({
    Maximum = 8,
    Callback = function(rows)
       return rows
+      print(rows)
    end
 })
 
@@ -63,6 +64,7 @@ Section:Slider({
    Maximum = 800,
    Callback = function(delg)
       return delg
+      print(delg)
    end
 })
 
