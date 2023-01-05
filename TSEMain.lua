@@ -1,4 +1,3 @@
-task.wait()
 local library = loadstring(game:GetObjects("rbxassetid://7657867786")[1].Source)()
 local Wait = library.subs.Wait -- Only returns if the GUI has not been terminated. For 'while Wait() do' loops
 
@@ -13,6 +12,68 @@ local GeneralTab = OxiMain:CreateTab({
 Name = "General"
 })
 
+local FarmingSection = GeneralTab:CreateSection({
+   Name = "Auto Games"
+})
+FarmingSection:AddToggle({
+   Name = "Auto Game",
+   Flag = "xxxxx"
+})
+
+local MiscSectionR = GeneralTab:CreateSection({
+   Name = "Misc",
+   Side = "Right"
+})
+
+MiscSectionR:AddToggle({
+   Name = "Anti AFK",
+   Flag = "antiafk",
+   Callback = function()
+      local vu = game:GetService("VirtualUser")
+      game:GetService("Players").LocalPlayer.Idled:connect(function()
+	      vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+	      task.wait()
+	      vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+         warn("Saved AFK Kick")
+      end)
+   end
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--[[
 -----------------------------------------------------------------------------------------------------------------------------------
 local FarmingSection = GeneralTab:CreateSection({
 Name = "Farming"
@@ -96,6 +157,7 @@ end
 end
 })
 
+-----------------------------------------------------------------------------------------------------------------------------------
 local MiscSection = GeneralTab:CreateSection({
 Name = "Misc",
 Side = "Right"
@@ -128,6 +190,7 @@ Mode = "Dynamic" -- Dynamic means to use the 'hold' method, if the user keeps th
 Callback = print
 })
 
+-----------------------------------------------------------------------------------------------------------------------------------
 local FunSection = GeneralTab:CreateSection({
 Name = "Fun Cosmetics"
 })
@@ -171,7 +234,6 @@ end
 
 
 
---[[
 
 local delay = 0
 local rows = 0
