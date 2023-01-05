@@ -1,6 +1,9 @@
 local library = loadstring(game:GetObjects("rbxassetid://7657867786")[1].Source)()
 local Wait = library.subs.Wait -- Only returns if the GUI has not been terminated. For 'while Wait() do' loops
 
+local delay = 0
+local rows = 0
+
 local OxiMain = library:CreateWindow({
 Name = "Oxi's Trader",
 Themeable = {
@@ -16,12 +19,13 @@ Name = "General"
 })
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
-local FarmingSection = GeneralTab:CreateSection({
+local GeneralSection = GeneralTab:CreateSection({
    Name = "Auto Games"
 })
-FarmingSection:AddToggle({
+
+GeneralSection:AddToggle({
    Name = "Auto Game",
-   Flag = "xxxxx",
+   Flag = "autogame",
    Callback = function(autogame)
       local Tower = game.ReplicatedStorage.Remotes:WaitForChild("Game_Start")
       local Interact = game.ReplicatedStorage.Remotes:WaitForChild("Game_Interact")
@@ -42,6 +46,16 @@ FarmingSection:AddToggle({
    end
 })
 
+GeneralSection:AddSlider({
+   Name = "Rows",
+   Flag = "rows",
+   Value = 4,
+   Min = 0,
+   Max = 8,
+   Format = function(Value)
+      print(Value)
+      rows = Value
+   end
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 local MiscSectionR = GeneralTab:CreateSection({
    Name = "Misc",
@@ -258,8 +272,6 @@ end
 
 
 
-local delay = 0
-local rows = 0
 
 Section:Check({
    Text = "Auto Game",
