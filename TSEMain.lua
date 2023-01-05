@@ -10,6 +10,9 @@ General:CreateToggle("Anti Afk", function(value)
    if value ~= true then
       value = true
    elseif value == true then
+      if Remotes:WaitForChild("AFK") then
+         Remotes.AFK:Destroy()
+      end
       local vu = game:GetService("VirtualUser")
       game:GetService("Players").LocalPlayer.Idled:connect(function()
 	      vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
@@ -17,8 +20,6 @@ General:CreateToggle("Anti Afk", function(value)
 	      vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
          warn("Saved AFK Kick")
       end)
-   elseif Remotes:WaitForChild("AFK") then
-      Remotes:WaitForChild("AFK"):Destroy()
    end
 end)
 
