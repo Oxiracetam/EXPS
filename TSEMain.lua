@@ -1,6 +1,6 @@
 local Library = loadstring(Game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wizard"))()
 local Remotes = game.ReplicatedStorage.Remotes
-local Tower = Remotes:WaitForChild("Game_Start")
+local Gamestart = Remotes:WaitForChild("Game_Start")
 local Interact = Remotes:WaitForChild("Game_Interact")
 local afkr = Remotes:WaitForChild("AFK")
 local player = game:WaitForChild("Players").LocalPlayer
@@ -20,7 +20,7 @@ General:CreateToggle("Auto Games", function(value)
    while value == true do
       if value == true then
          local x1 = tokens.Value
-         Tower:InvokeServer("Towers", {amount = 100})
+         Gamestart:InvokeServer("Towers", {amount = 100})
          task.wait(3)
          for i = 1, rows do
             Interact:InvokeServer("Towers", "Click", {row = i, val = 1})
@@ -30,7 +30,7 @@ General:CreateToggle("Auto Games", function(value)
          task.wait(1)
          local x2 = tokens.Value
          if x2 == x1 then
-            print("No Cash out")
+            error("No Cash out")
          elseif x2 > x1 then
             warn("Cashed out!")
          end
@@ -70,14 +70,43 @@ Misc:CreateToggle("Anti Afk", function(value)
    end
 end)
 
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+local Test = Window:NewSection("Test")
 
+local xx = 1
+local yy = 1
+------------------------------------------------------------------------------------------------------------------------------------------------------------
+Test:CreateButton("Test Tower", function()
+   Interact:InvokeServer("Towers", "Click", {row = yy, val = xx})
+end)
 
+Test:CreateButton("Start Tower Game", function()
+   Gamestart:InvokeServer("Towers", {amount = 100})
+end)
 
+Test:CreateButton("Cash Out", function()
+   local x1 = tokens.Value
+   Interact:InvokeServer("Towers", "Cashout")
+   task.wait(1)
+   local x2 = tokens.Value
+         if x2 == x1 then
+            error("No Cash out")
+         elseif x2 > x1 then
+            warn("Cashed out!")
+         end
+end)
 
+Test:CreateSlider("Tower", 1, 3, 1, false, function(value)
+   
+   xx = value
+end)
 
-
-
-
+Test:CreateSlider("Row", 1, 8, 1, false, function(value)
+   
+   yy = value
+end)
 
 
 
