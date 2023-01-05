@@ -1,5 +1,6 @@
 local Library = loadstring(Game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wizard"))()
 local Remotes = game.ReplicatedStorage.Remotes
+local afkr = Remotes:WaitForChild("AFK")
 local delay = 0
 local rows = 0
 
@@ -7,7 +8,6 @@ local Window = Library:NewWindow("Oxi's Trader")
 local General = Window:NewSection("Automation")
 
 General:CreateToggle("Anti Afk", function(value)
-   local afkr = Remotes:WaitForChild("AFK")
    if value ~= true then
       value = true
    elseif value == true then
