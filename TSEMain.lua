@@ -24,7 +24,7 @@ Section:Check({
       local Tower = game.ReplicatedStorage.Remotes:WaitForChild("Game_Start")
       local Interact = game.ReplicatedStorage.Remotes:WaitForChild("Game_Interact")
 
-      while autogame == true1 do
+      while autogame == true do
          Tower:InvokeServer("Towers", {amount = 100})
          task.wait(3)
 
