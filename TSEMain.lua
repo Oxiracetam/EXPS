@@ -201,3 +201,4 @@ game:GetService("Players").LocalPlayer.Idled:connect(function()
 	task.wait()
 	vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
    warn("Saved AFK Kick")
+   ]]
