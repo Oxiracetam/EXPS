@@ -19,13 +19,12 @@ local General = Window:NewSection("Automation")
 General:CreateToggle("Auto Games", function(value)
    while value == true do
       if value == true then
-         local x1 = tokens.Value
          Gamestart:InvokeServer("Towers", {amount = 100})
-         task.wait(3)
          for i = 1, rows do
             Interact:InvokeServer("Towers", "Click", {row = i, val = 1})
-            task.wait(1)
+            task.wait(0.1)
          end
+         local x1 = tokens.Value
          Interact:InvokeServer("Towers", "Cashout")
          task.wait(1)
          local x2 = tokens.Value
@@ -78,12 +77,12 @@ local Test = Window:NewSection("Test")
 local xx = 1
 local yy = 1
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
-Test:CreateButton("Test Tower", function()
-   Interact:InvokeServer("Towers", "Click", {row = yy, val = xx})
-end)
-
 Test:CreateButton("Start Tower Game", function()
    Gamestart:InvokeServer("Towers", {amount = 100})
+end)
+
+Test:CreateButton("Test Tower", function()
+   Interact:InvokeServer("Towers", "Click", {row = yy, val = xx})
 end)
 
 Test:CreateButton("Cash Out", function()
