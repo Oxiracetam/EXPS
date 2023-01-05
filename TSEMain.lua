@@ -1,5 +1,7 @@
 local Library = loadstring(Game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wizard"))()
 local Remotes = game.ReplicatedStorage.Remotes
+local Tower = Remotes:WaitForChild("Game_Start")
+local Interact = Remotes:WaitForChild("Game_Interact")
 local afkr = Remotes:WaitForChild("AFK")
 local delay = 0
 local rows = 0
@@ -25,8 +27,6 @@ General:CreateToggle("Anti Afk", function(value)
 end)
 
 General:CreateToggle("Auto Games", function(value)
-   local Tower = Remotes:WaitForChild("Game_Start")
-   local Interact = Remotes:WaitForChild("Game_Interact")
    while value == true do
       if value == true then
          Tower:InvokeServer("Towers", {amount = 100})
