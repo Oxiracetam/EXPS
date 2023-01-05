@@ -56,7 +56,7 @@ Section:Slider({
    end
 })
 
-Section:Slider2({
+Section:Slider({
    Text = "Delay (sec)",
    Minimum = 1,
    Default = 400,
