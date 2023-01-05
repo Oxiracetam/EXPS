@@ -48,7 +48,6 @@ Section:Slider({
    Callback = function(rows)
       return rows
       print(rows)
-   end
 })
 
 Section:Slider({
@@ -59,7 +58,6 @@ Section:Slider({
    Callback = function(delg)
       return delg
       print(delg)
-   end
 })
 
 SectionR:Check({
