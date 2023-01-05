@@ -46,7 +46,6 @@ Section:Slider({
    Default = 4,
    Maximum = 8,
    Callback = function(rows)
-      return rows
       print(rows)
    end
 })
@@ -57,7 +56,6 @@ Section:Slider({
    Default = 400,
    Maximum = 800,
    Callback = function(delg)
-      return delg
       print(delg)
    end
 })
