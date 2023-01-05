@@ -12,7 +12,6 @@ local GeneralTab = OxiMain:CreateTab({
 Name = "General"
 })
 
---[[
 local FarmingSection = GeneralTab:CreateSection({
 Name = "Farming"
 })
@@ -160,17 +159,6 @@ return "Ragdoll Extension: " .. tostring(Value) .. "s"
 end
 end
 })
-]]
-
-
-
-
-
-
-
-
-
-
 
 
 
