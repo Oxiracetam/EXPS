@@ -31,7 +31,7 @@ General:CreateToggle("Auto Games", function(value)
          task.wait(3)
          for i = 1, rows do
             Interact:InvokeServer("Towers", "Click", {row = i, val = 1})
-            task.wait(0.5)
+            task.wait(1)
          end
          Interact:InvokeServer("Towers", "Cashout")
          print("Attempted Cashed Out!")
@@ -44,7 +44,7 @@ General:CreateSlider("Rows", 1, 8, 4, false, function(value)
    rows = value
 end)
 
-General:CreateSlider("Delay (sec)", 1, 800, 370, false, function(value)
+General:CreateSlider("Delay (sec)", 1, 650, 600, false, function(value)
    delay = value
 end)
 
