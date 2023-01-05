@@ -34,7 +34,7 @@ Section:Check({
          Tower:InvokeServer("Towers", {amount = 100})
          task.wait(3)
 
-         for i = 1, 4 do
+         for i = 1, rows do
             Interact:InvokeServer("Towers", "Click", {row = i, val = 1})
             task.wait(0.1)
          end
@@ -47,12 +47,22 @@ Section:Check({
 })
 
 Section:Slider({
-   Text = "Price",
+   Text = "Rows",
    Minimum = 1,
    Default = 4,
    Maximum = 8,
    Callback = function(rows)
       return rows
+   end
+})
+
+Section:Slider2({
+   Text = "Delay (sec)",
+   Minimum = 1,
+   Default = 400,
+   Maximum = 800,
+   Callback = function(delg)
+      return delg
    end
 })
 
