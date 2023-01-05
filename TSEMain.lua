@@ -26,17 +26,19 @@ General:CreateToggle("Auto Games", function(value)
    local Interact = game.ReplicatedStorage.Remotes:WaitForChild("Game_Interact")
 
    while value == true do
-      Tower:InvokeServer("Towers", {amount = 100})
-      task.wait(3)
+      if value == true then
+         Tower:InvokeServer("Towers", {amount = 100})
+         task.wait(3)
 
-      for i = 1, rows do
-         Interact:InvokeServer("Towers", "Click", {row = i, val = 1})
-         task.wait(0.5)
+         for i = 1, rows do
+            Interact:InvokeServer("Towers", "Click", {row = i, val = 1})
+            task.wait(0.5)
+         end
+
+         Interact:InvokeServer("Towers", "Cashout")
+         print("Cashed Out!")
+         task.wait(delay)
       end
-
-      Interact:InvokeServer("Towers", "Cashout")
-      print("Cashed Out!")
-      task.wait(delay)
    end
 end)
 
@@ -44,12 +46,8 @@ General:CreateSlider("Rows", 1, 8, 4, false, function(value)
    rows = value
 end)
 
-General:CreateSlider("Delay", 1, 800, 400, false, function(value)
+General:CreateSlider("Delay (sec)", 1, 800, 370, false, function(value)
    delay = value
-end)
-
-General:CreateButton("Self Destruct", function()
-   warn("DESTRUCTED")
 end)
 
 
