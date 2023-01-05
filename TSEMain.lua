@@ -12,7 +12,8 @@ General:CreateToggle("Anti Afk", function(value)
       value = true
    elseif value == true then
       local vu = game:GetService("VirtualUser")
-      game.ReplicatedStorage.Remotes.AFK:Destroy()
+      local AFKR = game.ReplicatedStorage.Remotes:WaitForChild("AFK")
+      AFKR:Destroy()
       game:GetService("Players").LocalPlayer.Idled:connect(function()
 	      vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
 	      task.wait()
