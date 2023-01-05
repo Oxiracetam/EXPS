@@ -46,6 +46,7 @@ Section:Check({
    end
 })
 
+--[[
 Section:Check({
    Text = "AutoSnipe",
    Flag = "AutoSnipe"
@@ -57,6 +58,7 @@ Section:Check({
        warn(bool)
    end
 })
+]]
 
 Section:Dropdown({
    Text = "Item",
@@ -92,7 +94,15 @@ Section2:Check({
 	      vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
 	      task.wait()
 	      vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+         warn("Saved AFK Kick")
       end)
+   end
+})
+
+Section2:Button({
+   Text = "Self Destruct",
+   Callback = function(destruct)
+      Window:Destroy()
    end
 })
 
