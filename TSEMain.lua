@@ -45,9 +45,10 @@ Section:Slider({
    Minimum = 1,
    Default = 4,
    Maximum = 8,
-   Callback = function(rows)
-      return rows
-      print(rows)
+   Callback = function(n)
+      return n
+      print(n)
+   end
 })
 
 Section:Slider({
@@ -58,6 +59,7 @@ Section:Slider({
    Callback = function(delg)
       return delg
       print(delg)
+   end
 })
 
 SectionR:Check({
