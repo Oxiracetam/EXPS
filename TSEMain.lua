@@ -20,6 +20,12 @@ General:CreateToggle("Anti Afk", function(value)
 end)
 
 
+General:CreateButton("Self Destruct", function()
+   Window:Destroy()
+   warn("DESTRUCTED")
+end)
+
+
 
 
 
