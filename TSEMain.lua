@@ -1,6 +1,9 @@
 local Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/Oxiracetam/EXPS/main/HUD.lua'))()
 local Flags = Library.Flags
 
+local Window = Library:Window({
+   Text = "Console"
+})
 
 local Tab = Window:Tab({
    Text = "Trade Simulator PWN"
@@ -119,7 +122,7 @@ Section2:Check({
 Section2:Button({
    Text = "Self Destruct",
    Callback = function(destruct)
-      Tab:Destroy()
+      Library:Destroy()
       script:Destroy()
       warn("What are you talking about?")
    end
