@@ -16,12 +16,34 @@ local Tab2 = Window:Tab({
 ]]
 
 local Section = Tab:Section({
-   Text = "Auto"
+   Text = "Automation"
 })
 
 local Section2 = Tab:Section({
-   Text = "Misc",
+   Text = "Miscellaneous",
    Side = "Right"
+})
+
+Section:Check({
+   Text = "Auto Game",
+   Callback = function(autogame)
+      local Tower = game.ReplicatedStorage.Remotes:WaitForChild("Game_Start")
+      local Interact = game.ReplicatedStorage.Remotes:WaitForChild("Game_Interact")
+
+      while autogame do
+         Tower:InvokeServer("Towers", {amount = 100})
+         task.wait(3)
+
+         for i = 1, 4 do
+            Interact:InvokeServer("Towers", "Click", {row = i, val = 1})
+            task.wait(0.1)
+         end
+
+         Interact:InvokeServer("Towers", "Cashout")
+         print("Cashed Out!")
+         task.wait(400)
+      end
+   end
 })
 
 Section:Check({
@@ -63,10 +85,15 @@ Section:Button({
 })
 
 Section2:Check({
-   Text = "Auto-Wall",
-   Callback = function(bool)
-       warn(bool)
+   Text = "Anti-AFK",
+   Callback = function()
+      local vu = game:GetService("VirtualUser")
+      game:GetService("Players").LocalPlayer.Idled:connect(function()
+	   vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
+	   task.wait()
+	   vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
    end
+end
 })
 
 Section2:Label({
