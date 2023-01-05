@@ -27,7 +27,7 @@ General:CreateToggle("Auto Games", function(value)
             task.wait(1)
          end
          Interact:InvokeServer("Towers", "Cashout")
-         task.wait(5)
+         task.wait(1)
          local x2 = tokens.Value
          if x2 == x1 then
             print("No Cash out")
