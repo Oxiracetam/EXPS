@@ -3,8 +3,8 @@ local Remotes = game.ReplicatedStorage.Remotes
 local Tower = Remotes:WaitForChild("Game_Start")
 local Interact = Remotes:WaitForChild("Game_Interact")
 local afkr = Remotes:WaitForChild("AFK")
-local delay = 0
-local rows = 0
+local delay = 600
+local rows = 4
 
 local Window = Library:NewWindow("Oxi's Trader")
 
