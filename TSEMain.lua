@@ -7,11 +7,12 @@ local Window = Library:NewWindow("Oxi's Trader")
 local General = Window:NewSection("Automation")
 
 General:CreateToggle("Anti Afk", function(value)
+   local afkr = Remotes:WaitForChild("AFK")
    if value ~= true then
       value = true
    elseif value == true then
-      if Remotes:WaitForChild("AFK") then
-         Remotes.AFK:Destroy()
+      if afkr then
+         afkr:Destroy()
       end
       local vu = game:GetService("VirtualUser")
       game:GetService("Players").LocalPlayer.Idled:connect(function()
