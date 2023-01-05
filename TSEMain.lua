@@ -21,7 +21,7 @@ end)
 
 
 General:CreateButton("Self Destruct", function()
-   --Window:Destroy()
+   Window:Destroy()
    warn("DESTRUCTED")
 end)
 
