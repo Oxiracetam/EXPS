@@ -34,15 +34,25 @@ Section:Check({
          Tower:InvokeServer("Towers", {amount = 100})
          task.wait(3)
 
-         for i = 1, 1 do
+         for i = 1, 4 do
             Interact:InvokeServer("Towers", "Click", {row = i, val = 1})
             task.wait(0.1)
          end
 
          Interact:InvokeServer("Towers", "Cashout")
          print("Cashed Out!")
-         task.wait(400)
+         task.wait(rows)
       end
+   end
+})
+
+Section:Slider({
+   Text = "Price",
+   Minimum = 1,
+   Default = 4,
+   Maximum = 8,
+   Callback = function(rows)
+      return rows
    end
 })
 
@@ -58,7 +68,6 @@ Section:Check({
        warn(bool)
    end
 })
-]]
 
 Section:Dropdown({
    Text = "Item",
@@ -85,6 +94,7 @@ Section:Button({
        warn("Settings Reseted.")
    end
 })
+]] 
 
 Section2:Check({
    Text = "Anti-AFK",
