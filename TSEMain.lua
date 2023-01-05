@@ -60,7 +60,7 @@ Section:Slider({
    end
 })
 
-Section2:Slider({
+Section:Slider({
    Text = "Pitch Offset",
    Minimum = 100,
    Default = 150,
