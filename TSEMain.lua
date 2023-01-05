@@ -1,6 +1,3 @@
--- New example script written by wally
--- You can suggest changes with a pull request or something
-
 local repo = 'https://raw.githubusercontent.com/wally-rblx/LinoriaLib/main/'
 
 local Library = loadstring(game:HttpGet(repo .. 'Library.lua'))()
@@ -8,28 +5,19 @@ local ThemeManager = loadstring(game:HttpGet(repo .. 'addons/ThemeManager.lua'))
 local SaveManager = loadstring(game:HttpGet(repo .. 'addons/SaveManager.lua'))()
 
 local Window = Library:CreateWindow({
-    -- Set Center to true if you want the menu to appear in the center
-    -- Set AutoShow to true if you want the menu to appear when it is created
-    -- Position and Size are also valid options here
-    -- but you do not need to define them unless you are changing them :)
-
-    Title = 'Example menu',
+    Title = 'Oxi's Trader',
     Center = true, 
     AutoShow = true,
 })
 
--- You do not have to set your tabs & groups up this way, just a prefrence.
 local Tabs = {
     -- Creates a new tab titled Main
     Main = Window:AddTab('Main'), 
     ['UI Settings'] = Window:AddTab('UI Settings'),
 }
 
--- Groupbox and Tabbox inherit the same functions
--- except Tabboxes you have to call the functions on a tab (Tabbox:AddTab(name))
 local LeftGroupBox = Tabs.Main:AddLeftGroupbox('Groupbox')
 
--- Tabboxes are a tiny bit different, but here's a basic example:
 --[[
 
 local TabBox = Tabs.Main:AddLeftTabbox() -- Add Tabbox on left side
@@ -44,8 +32,12 @@ local Tab2 = TabBox:AddTab('Tab 2')
 -- Arguments: Index, Options
 LeftGroupBox:AddToggle('MyToggle', {
    Text = 'This is a toggle',
-   Default = true, -- Default value (true / false)
-   Tooltip = 'This is a tooltip', -- Information shown when you hover over the toggle
+   Default = false,
+   Tooltip = 'Prevents Roblox Idle Kick',
+   Callback = function()
+      local value = Toggles.MyToggle.Value
+      print(value)
+   end
 })
 
 
