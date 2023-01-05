@@ -32,7 +32,7 @@ General:CreateToggle("Auto Games", function(value)
          if x2 == x1 then
             print("No Cash out")
          elseif x2 > x1 then
-            print("Cashed out!")
+            warn("Cashed out!")
          end
          task.wait(delay)
       end
