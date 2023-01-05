@@ -1,6 +1,9 @@
 local Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/Oxiracetam/EXPS/main/HUD.lua'))()
 local Flags = Library.Flags
 
+local delay = 0
+local rows = 0
+
 local Window = Library:Window({
    Text = "Console"
 })
@@ -35,7 +38,7 @@ Section:Check({
 
          Interact:InvokeServer("Towers", "Cashout")
          print("Cashed Out!")
-         task.wait(delg)
+         task.wait(delay)
       end
    end
 })
@@ -45,8 +48,9 @@ Section:Slider({
    Minimum = 1,
    Default = 4,
    Maximum = 8,
-   Callback = function(rows)
-      print(rows)
+   Callback = function(n)
+      rows = n
+      print(n)
    end
 })
 
@@ -55,18 +59,9 @@ Section:Slider({
    Minimum = 1,
    Default = 400,
    Maximum = 800,
-   Callback = function(delg)
-      print(delg)
-   end
-})
-
-Section:Slider({
-   Text = "Pitch Offset",
-   Minimum = 100,
-   Default = 150,
-   Maximum = 500,
    Callback = function(n)
-       warn(n)
+      delay = n
+      print(n)
    end
 })
 
