@@ -56,15 +56,6 @@ Section:Slider({
    end
 })
 
-Section:Slider({
-   Text = "Delay (sec)",
-   Minimum = 1,
-   Default = 400,
-   Maximum = 800,
-   Callback = function(delg)
-      return delg
-   end
-})
 
 --[[
 Section:Check({
