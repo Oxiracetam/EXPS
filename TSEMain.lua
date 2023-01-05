@@ -122,8 +122,6 @@ Section2:Check({
 Section2:Button({
    Text = "Self Destruct",
    Callback = function(destruct)
-      Library:Destroy()
-      script:Destroy()
       warn("What are you talking about?")
    end
 })
