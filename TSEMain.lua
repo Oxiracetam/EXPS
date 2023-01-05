@@ -1,34 +1,32 @@
-local Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/Oxiracetam/EXPS/main/HUD'))()
+local Library = loadstring(game:HttpGet('https://raw.githubusercontent.com/Oxiracetam/EXPS/main/HUD.lua'))()
 local Flags = Library.Flags
 
 local Window = Library:Window({
-   Text = "Baseplate"
+   Text = "Oxi's Trader"
 })
 
 local Tab = Window:Tab({
-   Text = "Aiming"
+   Text = "Trade Simulator PWN"
 })
 
+--[[
 local Tab2 = Window:Tab({
-   Text = "Visual"
+   Text = "Misc"
 })
+]]
 
 local Section = Tab:Section({
-   Text = "Aiming"
+   Text = "Auto"
 })
 
 local Section2 = Tab:Section({
-   Text = "Anti-Aim"
-})
-
-local Section3 = Tab:Section({
-   Text = "Ragebot",
+   Text = "Misc",
    Side = "Right"
 })
 
 Section:Check({
-   Text = "Aimbot",
-   Flag = "Aimbot"
+   Text = "AutoSnipe",
+   Flag = "AutoSnipe"
 })
 
 Section:Check({
@@ -39,19 +37,19 @@ Section:Check({
 })
 
 Section:Dropdown({
-   Text = "Body Part",
-   List = {"Head", "Torso", "Random"},
+   Text = "Item",
+   List = {"Dominus", "LOL", "Random"},
    Callback = function(opt)
        warn(opt)
    end
 })
 
 Section:Slider({
-   Text = "Hit Chance",
+   Text = "Price",
    Minimum = 0,
-   Default = 60,
-   Maximum = 100,
-   Postfix = "%",
+   Default = 1,
+   Maximum = 100000000,
+   --Postfix = "%",
    Callback = function(n)
        warn(n)
    end
@@ -65,57 +63,13 @@ Section:Button({
 })
 
 Section2:Check({
-   Text = "Spin"
-})
-
-Section2:Slider({
-   Text = "Pitch Offset",
-   Minimum = 100,
-   Default = 150,
-   Maximum = 500,
-   Callback = function(n)
-       warn(n)
-   end
-})
-
-Section2:Slider({
-   Text = "Yaw Offset",
-   Minimum = 100,
-   Default = 150,
-   Maximum = 500,
-   Callback = function(n)
-       warn(n)
-   end
-})
-
-Section2:Button({
-   Text = "Resolve Positions"
-})
-
-Section3:Check({
    Text = "Auto-Wall",
    Callback = function(bool)
        warn(bool)
    end
 })
 
-Section3:Check({
-   Text = "Trigger Bot"
-})
-
-Section3:Check({
-   Text = "Insta-Kill"
-})
-
-Section3:Dropdown({
-   Text = "Hitscan Directions",
-   List = {"Left", "Right", "Up", "Down", "All"},
-   Callback = function(opt)
-       warn(opt)
-   end
-})
-
-Section3:Label({
+Section2:Label({
    Text = "Status: Undetected",
    Color = Color3.fromRGB(100, 190, 31)
 })
