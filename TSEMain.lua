@@ -52,7 +52,7 @@ GeneralSection:AddSlider({
    Value = 4,
    Min = 0,
    Max = 8,
-   Format = function(Value)
+   Callback = function(Value)
       rows = Value
    end
 })
@@ -63,7 +63,7 @@ GeneralSection:AddSlider({
    Value = 400,
    Min = 0,
    Max = 800,
-   Format = function(Value)
+   Callback = function(Value)
       delay = Value
    end
 })
