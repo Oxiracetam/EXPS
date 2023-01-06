@@ -1,4 +1,4 @@
-local Library = loadstring(Game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wizard"))()
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/bloodball/-back-ups-for-libs/main/wizard"))()
 local Remotes = game.ReplicatedStorage.Remotes
 local Gamestart = Remotes:WaitForChild("Game_Start")
 local Interact = Remotes:WaitForChild("Game_Interact")
@@ -6,7 +6,7 @@ local afkr = Remotes:WaitForChild("AFK")
 local player = game:WaitForChild("Players").LocalPlayer
 local tokens = player:WaitForChild("Tokens")
 local delay = 600
-local rows = 3
+local rows = 2
 
 local Window = Library:NewWindow("Oxi's Trader")
 
@@ -15,19 +15,16 @@ local Window = Library:NewWindow("Oxi's Trader")
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 local General = Window:NewSection("Auto Games")
 
-------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------TOWER GAMEE
 General:CreateToggle("Towers", function(value)
-   while value == true do
+   while value do
       if value == true then
-         local x1 = tokens.Value
          Gamestart:InvokeServer("Towers", {amount = 100})
-         task.wait(3)
          for i = 1, rows do
             Interact:InvokeServer("Towers", "Click", {row = i, val = 1})
-            task.wait(1)
          end
+         local x1 = tokens.Value
          Interact:InvokeServer("Towers", "Cashout")
-         task.wait(1)
          local x2 = tokens.Value
          if x2 == x1 then
             print("No Cash out")
@@ -42,15 +39,12 @@ end)
 General:CreateToggle("Mines", function(value)
    while value == true do
       if value == true then
-         local x1 = tokens.Value
          Gamestart:InvokeServer("Mines", {amount = 100})
-         task.wait(3)
-         for i = 1, 1 do
-            Interact:InvokeServer("Mines", "Click", {val = 21})
-            task.wait(1)
+         for i = 1, rows do
+            Interact:InvokeServer("Mines", "Click", {val = math.random(1, 25)})
          end
+         local x1 = tokens.Value
          Interact:InvokeServer("Mines", "Cashout")
-         task.wait(1)
          local x2 = tokens.Value
          if x2 == x1 then
             print("No Cash out")
@@ -58,11 +52,11 @@ General:CreateToggle("Mines", function(value)
             warn("Cashed out $" .. (x2 - x1))
          end
          task.wait(delay)
-      end
+      elseif value == false then break end
    end
 end)
 
-General:CreateSlider("Rows", 1, 8, 3, false, function(value)
+General:CreateSlider("Boxes", 1, 8, 2, false, function(value)
    rows = value
 end)
 
@@ -75,16 +69,14 @@ end)
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 local Misc = Window:NewSection("Misc")
 
-------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------ANTI AFK
 Misc:CreateToggle("Anti Afk", function(value)
-   if value ~= true then
-      value = true
-   elseif value == true then
+   if value == true then
       if afkr ~= nil then
          afkr:Destroy()
       end
       local vu = game:GetService("VirtualUser")
-      game:GetService("Players").LocalPlayer:WaitForChild("Idled"):connect(function()
+      game:GetService("Players").LocalPlayer.Idled:connect(function()
 	      vu:Button2Down(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
 	      task.wait()
 	      vu:Button2Up(Vector2.new(0,0),workspace.CurrentCamera.CFrame)
@@ -100,7 +92,7 @@ local Test = Window:NewSection("Test")
 
 local xx = 1
 local yy = 1
-------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------TEST TOWER
 Test:CreateButton("Start Tower Game", function()
    Gamestart:InvokeServer("Towers", {amount = 100})
 end)
@@ -112,7 +104,6 @@ end)
 Test:CreateButton("Cash Out", function()
    local x1 = tokens.Value
    Interact:InvokeServer("Towers", "Cashout")
-   task.wait(1)
    local x2 = tokens.Value
    if x2 == x1 then
       print("No Cash out")
@@ -122,13 +113,11 @@ Test:CreateButton("Cash Out", function()
 end)
 
 Test:CreateSlider("Tower", 1, 3, 1, false, function(value)
-   
-   xx = value
+   local xx = value
 end)
 
 Test:CreateSlider("Row", 1, 8, 1, false, function(value)
-   
-   yy = value
+   local yy = value
 end)
 
 
