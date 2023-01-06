@@ -5,7 +5,7 @@ local Interact = Remotes:WaitForChild("Game_Interact")
 local afkr = Remotes:WaitForChild("AFK")
 local player = game:WaitForChild("Players").LocalPlayer
 local tokens = player:WaitForChild("Tokens")
-local delay = 600
+local delay = 380
 local rows = 2
 
 local Window = Library:NewWindow("Oxi's Trader")
@@ -60,7 +60,7 @@ General:CreateSlider("Boxes", 1, 8, 2, false, function(value)
    rows = value
 end)
 
-General:CreateSlider("Delay (sec)", 1, 650, 600, false, function(value)
+General:CreateSlider("Delay (sec)", 1, 650, 380, false, function(value)
    delay = value
 end)
 
@@ -145,7 +145,7 @@ end)
 --[[
 
 General:CreateButton("Button", function()
-   print("HI")
+   print("Hi")
 end)
 
 General:CreateTextbox("TextBox", function(text)
@@ -156,11 +156,11 @@ General:CreateToggle("Auto Ez", function(value)
    print(value)
 end)
 
-General:CreateDropdown("DropDown", {"Hello", "World", "Hello World"}, 2, function(text)
+General:CreateDropdown("DropDown", {"1", "2", "3"}, 2, function(text)
    print(text)
 end)
 
-General:CreateSlider("Slider", 0, 100, 15, false, function(value)
+General:CreateSlider("Slider", 0, 100, 50, false, function(value)
    print(value)
 end)
 
