@@ -23,7 +23,7 @@ local Window = Rayfield:CreateWindow({
 		FileName = "Oxi Hub",
 	},
 	Discord = {
-		Enabled = false,
+	 	Enabled= false,
 		Invite = "", -- The Discord invite code, do not include discord.gg/
 		RememberJoins = true, -- Set this to false to make them join the discord every time they load it up
 	},
