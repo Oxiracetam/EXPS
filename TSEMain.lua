@@ -13,6 +13,45 @@ local tokens = player:WaitForChild("Tokens")
 local delay = 60
 local rows = 2
 
+-----FUNCS-----
+
+local function antiafk(afkbool)
+	if afkbool == true then
+		game:GetService("Players").LocalPlayer.Idled:connect(function()
+			vu:Button2Down(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
+			task.wait()
+			vu:Button2Up(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
+			warn("Saved AFK Kick")
+		end)
+
+		if afkr ~= nil then
+			afkr:FireServer(false)
+			afkr:Destroy()
+		end
+		warn("ANTI AFK ENABLED!")
+	end
+end
+
+local function autorejoin(rjbool)
+	if rjbool == true then
+		repeat
+			task.wait()
+		until game.CoreGui:FindFirstChild("RobloxPromptGui")
+
+		promOver.ChildAdded:connect(function(x)
+			if x.Name == "ErrorPrompt" then
+				repeat
+					TPService:Teleport(game.PlaceId)
+					task.wait(1)
+				until false
+			end
+		end)
+		warn("AUTO REJOIN ENABLED!")
+	end
+end
+
+-----UI-----
+
 local Window = Rayfield:CreateWindow({
 	Name = "Oxi's PWNER",
 	LoadingTitle = "Oxi's PWNER Project",
@@ -132,19 +171,7 @@ local AntiAFK = Misc:CreateToggle({ --Anti AFK
 	CurrentValue = true,
 	Flag = "AntiAFK", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
 	Callback = function(Value)
-		if Value == true then
-			game:GetService("Players").LocalPlayer.Idled:connect(function()
-				vu:Button2Down(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
-				task.wait()
-				vu:Button2Up(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
-				warn("Saved AFK Kick")
-			end)
-
-			if afkr ~= nil then
-				afkr:FireServer(false)
-				afkr:Destroy()
-			end
-		end
+		antiafk(Value)
 	end,
 })
 
@@ -153,21 +180,7 @@ local AutoRejoin = Misc:CreateToggle({ --Auto Rejoin
 	CurrentValue = true,
 	Flag = "AutoRejoin", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
 	Callback = function(Value)
-		if Value == true then
-			repeat
-				task.wait()
-			until game.CoreGui:FindFirstChild("RobloxPromptGui")
-
-			promOver.ChildAdded:connect(function(x)
-				if x.Name == "ErrorPrompt" then
-					repeat
-						TPService:Teleport(game.PlaceId)
-						task.wait(1)
-					until false
-				end
-			end)
-		elseif Value ~= true then
-		end
+		autorejoin(Value)
 	end,
 })
 
@@ -247,7 +260,10 @@ local nStart = Test:CreateInput({
 		zz = Text
 	end,
 })
+
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 -- Rayfield:LoadConfiguration() --Auto Loads Previous Configuration
+antiafk(true)
+autorejoin(true)
