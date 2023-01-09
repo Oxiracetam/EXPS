@@ -4,9 +4,10 @@ local player = game:WaitForChild("Players").LocalPlayer
 local vu = game:GetService("VirtualUser")
 local TPService = game:GetService("TeleportService")
 local promOver = game.CoreGui.RobloxPromptGui.promptOverlay
-local Remotes = game.ReplicatedStorage.Remotes
+local Remotes = game.ReplicatedStorage:WaitForChild("Remotes")
 local Gamestart = Remotes:WaitForChild("Game_Start")
 local Interact = Remotes:WaitForChild("Game_Interact")
+local GetItemInfo = Remotes:WaitForChild("GetItemInfo")
 local afkr = Remotes:WaitForChild("AFK")
 local tokens = player:WaitForChild("Tokens")
 
@@ -14,6 +15,13 @@ local delay = 60
 local rows = 2
 
 -----FUNCS-----
+local function autosnipe(asbool)
+	if asbool == true then
+		GetItemInfo:InvokeServer("Camera Obscura")
+
+		warn("AUTO SNIPE ENABLED")
+	end
+end
 
 local function antiafk(afkbool)
 	if afkbool == true then
@@ -28,6 +36,7 @@ local function antiafk(afkbool)
 			afkr:FireServer(false)
 			afkr:Destroy()
 		end
+
 		warn("ANTI AFK ENABLED!")
 	end
 end
@@ -46,6 +55,7 @@ local function autorejoin(rjbool)
 				until false
 			end
 		end)
+
 		warn("AUTO REJOIN ENABLED!")
 	end
 end
@@ -54,6 +64,7 @@ local function cashout()
 	local x1 = tokens.Value
 	Interact:InvokeServer("Towers", "Cashout")
 	local x2 = tokens.Value
+
 	if x2 == x1 then
 		print("No Cash out")
 	elseif x2 > x1 then
@@ -73,7 +84,7 @@ local Window = Rayfield:CreateWindow({
 		FileName = "Oxi Hub",
 	},
 	Discord = {
-	 	Enabled= false,
+		Enabled = false,
 		Invite = "", -- The Discord invite code, do not include discord.gg/
 		RememberJoins = true, -- Set this to false to make them join the discord every time they load it up
 	},
@@ -94,47 +105,61 @@ local Window = Rayfield:CreateWindow({
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 local Auto = Window:CreateTab("Auto") -- Title, Image
 
-local Toggle = Auto:CreateToggle({ --Auto Tower
+local AutoSnipe = Auto:CreateToggle({ --Auto Snipe
+	Name = "Auto Snipe",
+	CurrentValue = false,
+	Flag = "AutoSnipe",
+	Callback = function(Value)
+		autosnipe(Value)
+	end,
+})
+
+local AutoTower = Auto:CreateToggle({ --Auto Tower
 	Name = "Auto Towers",
 	CurrentValue = false,
 	Flag = "AutoTower", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
 	Callback = function(Value)
-        while Value do
-            Gamestart:InvokeServer("Towers", { amount = 100 })
-            for i = 1, rows do
-                Interact:InvokeServer("Towers", "Click", { row = i, val = 1 })
-            end
+		while Value do
+			Gamestart:InvokeServer("Towers", { amount = 100 })
+			for i = 1, rows do
+				Interact:InvokeServer("Towers", "Click", { row = i, val = 1 })
+			end
+
 			cashout()
-            task.wait(delay)
-            if Value == false then
-                warn("BREAK")
-                break
-            end
-        end
+			task.wait(delay)
+
+			if Value == false then
+				warn("BREAK")
+				break
+			end
+		end
 	end,
 })
 
-local Toggle = Auto:CreateToggle({ --Auto Mine
+local AutoMine = Auto:CreateToggle({ --Auto Mine
 	Name = "Auto Mines",
 	CurrentValue = false,
 	Flag = "AutoMine", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
 	Callback = function(Value)
 		while Value do
-            Gamestart:InvokeServer("Mines", { amount = 100 })
-            for i = 1, rows do
-                Interact:InvokeServer("Mines", "Click", { val = math.random(1, 25) })
-            end
+			Gamestart:InvokeServer("Mines", { amount = 100 })
+
+			for i = 1, rows do
+				Interact:InvokeServer("Mines", "Click", { val = math.random(1, 25) })
+			end
+
 			cashout()
-            task.wait(delay)
-            if Value == false then
-                warn("BREAK")
-                break
-            end
+			task.wait(delay)
+
+			if Value == false then
+				warn("BREAK")
+				break
+			end
 		end
 	end,
 })
 
-local Slider = Auto:CreateSlider({ --Row Slider
+local rowSlider = Auto:CreateSlider({ --Row Slider
 	Name = "Rows",
 	Range = { 1, 8 },
 	Increment = 1,
@@ -146,7 +171,7 @@ local Slider = Auto:CreateSlider({ --Row Slider
 	end,
 })
 
-local Slider = Auto:CreateSlider({ --Game Delay
+local delaySlider = Auto:CreateSlider({ --Game Delay
 	Name = "Game Delay",
 	Range = { 10, 720 },
 	Increment = 10,
