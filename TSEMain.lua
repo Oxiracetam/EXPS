@@ -1,6 +1,8 @@
 local Rayfield = loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexware/Rayfield/main/source"))()
 
-repeat task.wait() until game:IsLoaded()
+repeat
+	task.wait()
+until game:IsLoaded()
 
 local vu = game:GetService("VirtualUser")
 local TPService = game:GetService("TeleportService")
@@ -35,9 +37,8 @@ local function autosnipe(bool)
 	if bool == true then
 		Getiteminfo:InvokeServer(ItemN)
 		Purchase:InvokeServer(ItemN)
+		
 		warn("PURCHASED: " .. ItemN)
-
-		warn("AUTO SNIPE ENABLED")
 	end
 end
 
@@ -45,7 +46,7 @@ local function autotower(bool)
 	if bool == true then
 		while bool == true do
 			Gamestart:InvokeServer("Towers", { amount = 100 })
-			
+
 			for i = 1, rows do
 				Interact:InvokeServer("Towers", "Click", { row = i, val = 1 })
 			end
@@ -168,7 +169,7 @@ local SnipeItem = AutoS:CreateInput({
 		ItemN = Text
 		print(Text)
 	end,
- })
+})
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
