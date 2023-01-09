@@ -1,5 +1,7 @@
 local Rayfield = loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexware/Rayfield/main/source"))()
 
+repeat task.wait() until game:IsLoaded()
+
 local player = game:WaitForChild("Players").LocalPlayer
 local vu = game:GetService("VirtualUser")
 local TPService = game:GetService("TeleportService")
@@ -7,24 +9,44 @@ local promOver = game.CoreGui.RobloxPromptGui.promptOverlay
 local Remotes = game.ReplicatedStorage:WaitForChild("Remotes")
 local Gamestart = Remotes:WaitForChild("Game_Start")
 local Interact = Remotes:WaitForChild("Game_Interact")
-local GetItemInfo = Remotes:WaitForChild("GetItemInfo")
+local Getiteminfo = Remotes:WaitForChild("GetItemInfo")
 local afkr = Remotes:WaitForChild("AFK")
 local tokens = player:WaitForChild("Tokens")
 
 local delay = 60
 local rows = 2
+local ItemN = "Item Name"
 
 -----FUNCS-----
-local function autosnipe(asbool)
-	if asbool == true then
-		GetItemInfo:InvokeServer("Camera Obscura")
+local function autosnipe(bool)
+	if bool == true then
+		Getiteminfo:InvokeServer("Camera Obscura")
 
 		warn("AUTO SNIPE ENABLED")
 	end
 end
 
-local function antiafk(afkbool)
-	if afkbool == true then
+local function autotower(bool)
+	if bool == true then
+		while Value == true do
+			Gamestart:InvokeServer("Towers", { amount = 100 })
+			for i = 1, rows do
+				Interact:InvokeServer("Towers", "Click", { row = i, val = 1 })
+			end
+
+			cashout()
+			task.wait(delay)
+
+			if Value == false then
+				warn("BREAK")
+				break
+			end
+		end
+	end
+end
+
+local function antiafk(bool)
+	if bool == true then
 		game:GetService("Players").LocalPlayer.Idled:connect(function()
 			vu:Button2Down(Vector2.new(0, 0), workspace.CurrentCamera.CFrame)
 			task.wait()
@@ -41,8 +63,8 @@ local function antiafk(afkbool)
 	end
 end
 
-local function autorejoin(rjbool)
-	if rjbool == true then
+local function autorejoin(bool)
+	if bool == true then
 		repeat
 			task.wait()
 		until game.CoreGui:FindFirstChild("RobloxPromptGui")
@@ -103,9 +125,9 @@ local Window = Rayfield:CreateWindow({
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-local Auto = Window:CreateTab("Auto") -- Title, Image
+local AutoS = Window:CreateTab("Auto Snipe") -- Title, Image
 
-local AutoSnipe = Auto:CreateToggle({ --Auto Snipe
+local AutoSnipe = AutoS:CreateToggle({ --Auto Snipe
 	Name = "Auto Snipe",
 	CurrentValue = false,
 	Flag = "AutoSnipe",
@@ -114,25 +136,22 @@ local AutoSnipe = Auto:CreateToggle({ --Auto Snipe
 	end,
 })
 
+local Auto = Window:CreateTab("Auto Game") -- Title, Image
+
+local SnipeItem = Auto:CreateInput({
+	Name = "Autosnipe Item",
+	PlaceholderText = ItemN,
+	RemoveTextAfterFocusLost = true,
+	Callback = function(Text)
+		local ItemN = Text
+	end,
+ })
+
 local AutoTower = Auto:CreateToggle({ --Auto Tower
 	Name = "Auto Towers",
 	CurrentValue = false,
 	Flag = "AutoTower", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
 	Callback = function(Value)
-		while Value do
-			Gamestart:InvokeServer("Towers", { amount = 100 })
-			for i = 1, rows do
-				Interact:InvokeServer("Towers", "Click", { row = i, val = 1 })
-			end
-
-			cashout()
-			task.wait(delay)
-
-			if Value == false then
-				warn("BREAK")
-				break
-			end
-		end
 	end,
 })
 
