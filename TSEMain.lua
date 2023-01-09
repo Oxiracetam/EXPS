@@ -50,6 +50,17 @@ local function autorejoin(rjbool)
 	end
 end
 
+local function cashout()
+	local x1 = tokens.Value
+	Interact:InvokeServer("Towers", "Cashout")
+	local x2 = tokens.Value
+	if x2 == x1 then
+		print("No Cash out")
+	elseif x2 > x1 then
+		warn("Cashed out $" .. (x2 - x1))
+	end
+end
+
 -----UI-----
 
 local Window = Rayfield:CreateWindow({
@@ -93,14 +104,7 @@ local Toggle = Auto:CreateToggle({ --Auto Tower
             for i = 1, rows do
                 Interact:InvokeServer("Towers", "Click", { row = i, val = 1 })
             end
-            local x1 = tokens.Value
-            Interact:InvokeServer("Towers", "Cashout")
-            local x2 = tokens.Value
-            if x2 == x1 then
-                print("No Cash out")
-            elseif x2 > x1 then
-                warn("Cashed out $" .. (x2 - x1))
-            end
+			cashout()
             task.wait(delay)
             if Value == false then
                 warn("BREAK")
@@ -120,14 +124,7 @@ local Toggle = Auto:CreateToggle({ --Auto Mine
             for i = 1, rows do
                 Interact:InvokeServer("Mines", "Click", { val = math.random(1, 25) })
             end
-            local x1 = tokens.Value
-            Interact:InvokeServer("Mines", "Cashout")
-            local x2 = tokens.Value
-            if x2 == x1 then
-                print("No Cash out")
-            elseif x2 > x1 then
-                warn("Cashed out $" .. (x2 - x1))
-            end
+			cashout()
             task.wait(delay)
             if Value == false then
                 warn("BREAK")
