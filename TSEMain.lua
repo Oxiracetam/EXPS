@@ -26,10 +26,13 @@ local function autosnipe(bool)
 	end
 end
 
+
+
 local function autotower(bool)
 	if bool == true then
-		while Value == true do
+		while bool == true do
 			Gamestart:InvokeServer("Towers", { amount = 100 })
+			
 			for i = 1, rows do
 				Interact:InvokeServer("Towers", "Click", { row = i, val = 1 })
 			end
@@ -37,7 +40,27 @@ local function autotower(bool)
 			cashout()
 			task.wait(delay)
 
-			if Value == false then
+			if bool == false then
+				warn("BREAK")
+				break
+			end
+		end
+	end
+end
+
+local function automine(bool)
+	if bool == true then
+		while bool == true do
+			Gamestart:InvokeServer("Mines", { amount = 100 })
+
+			for i = 1, rows do
+				Interact:InvokeServer("Mines", "Click", { val = math.random(1, 25) })
+			end
+
+			cashout()
+			task.wait(delay)
+
+			if bool == false then
 				warn("BREAK")
 				break
 			end
@@ -145,6 +168,9 @@ local SnipeItem = AutoS:CreateInput({
 	end,
  })
 
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 local Auto = Window:CreateTab("Auto Game") -- Title, Image
 
 local AutoTower = Auto:CreateToggle({ --Auto Tower
@@ -152,6 +178,7 @@ local AutoTower = Auto:CreateToggle({ --Auto Tower
 	CurrentValue = false,
 	Flag = "AutoTower", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
 	Callback = function(Value)
+		autotower(Value)
 	end,
 })
 
@@ -160,21 +187,7 @@ local AutoMine = Auto:CreateToggle({ --Auto Mine
 	CurrentValue = false,
 	Flag = "AutoMine", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
 	Callback = function(Value)
-		while Value do
-			Gamestart:InvokeServer("Mines", { amount = 100 })
-
-			for i = 1, rows do
-				Interact:InvokeServer("Mines", "Click", { val = math.random(1, 25) })
-			end
-
-			cashout()
-			task.wait(delay)
-
-			if Value == false then
-				warn("BREAK")
-				break
-			end
-		end
+		automine(Value)
 	end,
 })
 
