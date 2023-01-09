@@ -136,9 +136,7 @@ local AutoSnipe = AutoS:CreateToggle({ --Auto Snipe
 	end,
 })
 
-local Auto = Window:CreateTab("Auto Game") -- Title, Image
-
-local SnipeItem = Auto:CreateInput({
+local SnipeItem = AutoS:CreateInput({
 	Name = "Autosnipe Item",
 	PlaceholderText = ItemN,
 	RemoveTextAfterFocusLost = true,
@@ -146,6 +144,8 @@ local SnipeItem = Auto:CreateInput({
 		local ItemN = Text
 	end,
  })
+
+local Auto = Window:CreateTab("Auto Game") -- Title, Image
 
 local AutoTower = Auto:CreateToggle({ --Auto Tower
 	Name = "Auto Towers",
