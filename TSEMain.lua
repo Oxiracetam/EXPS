@@ -6,18 +6,22 @@ until game:IsLoaded()
 
 local vu = game:GetService("VirtualUser")
 local TPService = game:GetService("TeleportService")
+local Workspace = game:GetService("Workspace")
 local player = game:WaitForChild("Players").LocalPlayer
 local promOver = game.CoreGui.RobloxPromptGui:WaitForChild("promptOverlay")
 local Remotes = game.ReplicatedStorage:WaitForChild("Remotes")
+local RecentListings = Workspace.RecentListings.Board.SurfaceGui:WaitForChild("ScrollingFrame")
 local Gamestart = Remotes:WaitForChild("Game_Start")
 local Interact = Remotes:WaitForChild("Game_Interact")
 local Getiteminfo = Remotes:WaitForChild("GetItemInfo")
-local Purchase = Remotes:WaitForChild("Purchase1")
+local Purchase1 = Remotes:WaitForChild("Purchase1")
+local PurchaseL = Remotes:WaitForChild("PurchaseL")
 local afkr = Remotes:WaitForChild("AFK")
 local tokens = player:WaitForChild("Tokens")
 
 local delay = 60
 local rows = 2
+local listingP = 100
 local ItemN = "Item Name"
 
 -----FUNCS-----
@@ -36,9 +40,49 @@ end
 local function autosnipe(bool)
 	if bool == true then
 		Getiteminfo:InvokeServer(ItemN)
-		Purchase:InvokeServer(ItemN)
-		
+		Purchase1:InvokeServer(ItemN)
+
 		warn("PURCHASED: " .. ItemN)
+	end
+end
+
+local function recentsnipe(bool)
+	if bool == true then
+		while bool do
+			local listingN = RecentListings:GetChildren()
+			local bought = {}
+
+			for i = 1, #listingN do
+				if listingN[i] ~= nil and listingN[i].Name == "Item" then
+					local item = listingN[i].ItemName.Text
+					local pprice = listingN[i]:FindFirstChild("Price")
+					local price = pprice.Text
+					local newprice = price.gsub(price, "%D", "")
+					local nnewprice = tonumber(newprice)
+
+					if nnewprice <= listingP and item ~= bought then
+						Getiteminfo:InvokeServer(item)
+						PurchaseL:InvokeServer(item)
+						table.insert(bought, item)
+						print(bought)
+						warn("PURCHASED: " .. item)
+						Rayfield:Notify({
+							Title = "Recent Item Snipe",
+							Content = "You Bought: " .. item .. "!",
+							Duration = 5,
+							Image = 4483362458,
+							Actions = { -- Notification Buttons
+								Ignore = {
+									Name = "Okay!",
+									Callback = function() end,
+								},
+							},
+						})
+					end
+				end
+			end
+			task.wait()
+		end
 	end
 end
 
@@ -152,10 +196,31 @@ local Window = Rayfield:CreateWindow({
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 local AutoS = Window:CreateTab("Auto Snipe") -- Title, Image
 
-local AutoSnipe = AutoS:CreateToggle({ --Auto Snipe
-	Name = "Auto Snipe",
+local AutoSnipeListing = AutoS:CreateToggle({ --Auto Snipe
+	Name = "Auto Snipe Listing",
 	CurrentValue = false,
-	Flag = "AutoSnipe",
+	Flag = "AutoSnipeListing",
+	Callback = function(Value)
+		recentsnipe(Value)
+	end,
+})
+
+local priceSlider = AutoS:CreateSlider({ --Row Slider
+	Name = "Listing Price",
+	Range = { 1, 1000 },
+	Increment = 10,
+	Suffix = "Price",
+	CurrentValue = listingP,
+	Flag = "GameRow", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+	Callback = function(Value)
+		listingP = Value
+	end,
+})
+
+local AutoSnipeNew = AutoS:CreateToggle({ --Auto Snipe
+	Name = "Auto Snipe New",
+	CurrentValue = false,
+	Flag = "AutoSnipeNew",
 	Callback = function(Value)
 		autosnipe(Value)
 	end,
@@ -199,7 +264,7 @@ local rowSlider = Auto:CreateSlider({ --Row Slider
 	Range = { 1, 8 },
 	Increment = 1,
 	Suffix = "Rows/Mines",
-	CurrentValue = 2,
+	CurrentValue = rows,
 	Flag = "GameRow", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
 	Callback = function(Value)
 		rows = Value
@@ -211,7 +276,7 @@ local delaySlider = Auto:CreateSlider({ --Game Delay
 	Range = { 10, 720 },
 	Increment = 10,
 	Suffix = "s Delay",
-	CurrentValue = 60,
+	CurrentValue = delay,
 	Flag = "GameDelay", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
 	Callback = function(Value)
 		delay = Value
