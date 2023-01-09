@@ -2,14 +2,15 @@ local Rayfield = loadstring(game:HttpGet("https://raw.githubusercontent.com/shle
 
 repeat task.wait() until game:IsLoaded()
 
-local player = game:WaitForChild("Players").LocalPlayer
 local vu = game:GetService("VirtualUser")
 local TPService = game:GetService("TeleportService")
-local promOver = game.CoreGui.RobloxPromptGui.promptOverlay
+local player = game:WaitForChild("Players").LocalPlayer
+local promOver = game.CoreGui.RobloxPromptGui:WaitForChild("promptOverlay")
 local Remotes = game.ReplicatedStorage:WaitForChild("Remotes")
 local Gamestart = Remotes:WaitForChild("Game_Start")
 local Interact = Remotes:WaitForChild("Game_Interact")
 local Getiteminfo = Remotes:WaitForChild("GetItemInfo")
+local Purchase = Remotes:WaitForChild("Purchase1")
 local afkr = Remotes:WaitForChild("AFK")
 local tokens = player:WaitForChild("Tokens")
 
@@ -18,15 +19,27 @@ local rows = 2
 local ItemN = "Item Name"
 
 -----FUNCS-----
+local function cashout()
+	local x1 = tokens.Value
+	Interact:InvokeServer("Towers", "Cashout")
+	local x2 = tokens.Value
+
+	if x2 == x1 then
+		print("No Cash out")
+	elseif x2 > x1 then
+		warn("Cashed out $" .. (x2 - x1))
+	end
+end
+
 local function autosnipe(bool)
 	if bool == true then
-		Getiteminfo:InvokeServer("Camera Obscura")
+		Getiteminfo:InvokeServer(ItemN)
+		Purchase:InvokeServer(ItemN)
+		warn("PURCHASED: " .. ItemN)
 
 		warn("AUTO SNIPE ENABLED")
 	end
 end
-
-
 
 local function autotower(bool)
 	if bool == true then
@@ -105,18 +118,6 @@ local function autorejoin(bool)
 	end
 end
 
-local function cashout()
-	local x1 = tokens.Value
-	Interact:InvokeServer("Towers", "Cashout")
-	local x2 = tokens.Value
-
-	if x2 == x1 then
-		print("No Cash out")
-	elseif x2 > x1 then
-		warn("Cashed out $" .. (x2 - x1))
-	end
-end
-
 -----UI-----
 
 local Window = Rayfield:CreateWindow({
@@ -162,9 +163,10 @@ local AutoSnipe = AutoS:CreateToggle({ --Auto Snipe
 local SnipeItem = AutoS:CreateInput({
 	Name = "Autosnipe Item",
 	PlaceholderText = ItemN,
-	RemoveTextAfterFocusLost = true,
+	RemoveTextAfterFocusLost = false,
 	Callback = function(Text)
-		local ItemN = Text
+		ItemN = Text
+		print(Text)
 	end,
  })
 
@@ -309,7 +311,7 @@ local nStory = Test:CreateSlider({ --Game Delay
 local nStart = Test:CreateInput({
 	Name = "Start Number",
 	PlaceholderText = "Default: 100",
-	RemoveTextAfterFocusLost = true,
+	RemoveTextAfterFocusLost = false,
 	Callback = function(Text)
 		zz = Text
 	end,
