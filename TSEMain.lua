@@ -1,8 +1,8 @@
-local Rayfield = loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexware/Rayfield/main/source"))()
-
 repeat
 	task.wait()
 until game:IsLoaded()
+
+local Rayfield = loadstring(game:HttpGet("https://raw.githubusercontent.com/shlexware/Rayfield/main/source"))()
 
 local vu = game:GetService("VirtualUser")
 local TPService = game:GetService("TeleportService")
