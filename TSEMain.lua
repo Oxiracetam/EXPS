@@ -8,9 +8,11 @@ local vu = game:GetService("VirtualUser")
 local TPService = game:GetService("TeleportService")
 local Workspace = game:GetService("Workspace")
 local player = game:WaitForChild("Players").LocalPlayer
+local character = player:GetCharacter()
 local promOver = game.CoreGui.RobloxPromptGui:WaitForChild("promptOverlay")
 local Remotes = game.ReplicatedStorage:WaitForChild("Remotes")
 local RecentListings = Workspace.RecentListings.Board.SurfaceGui:WaitForChild("ScrollingFrame")
+local ItemSpawns = Workspace:WaitForChild("ItemSpawns")
 local Gamestart = Remotes:WaitForChild("Game_Start")
 local Interact = Remotes:WaitForChild("Game_Interact")
 local Getiteminfo = Remotes:WaitForChild("GetItemInfo")
@@ -44,6 +46,26 @@ local function autosnipe(bool)
 
 		warn("PURCHASED: " .. ItemN)
 	end
+end
+
+local function itemspawnesp(bool)
+   if bool == true then
+      while bool do
+         local spawns = ItemSpawns:GetChildren()
+
+         for i = 1, #spawns do
+            if spawns[i] ~= nil and spawns[i].Billboard == nil then
+               local Billboard = Instance.new("BillboardGui")
+               Billboard.Parent = spawns[i]
+               local Text = Instance.new("TextLabel")
+               Text.Parent = Billboard
+               Text.BackgroundTransparency = 1
+               Text.Text = "ITEM DROP"
+            end
+         end
+         task.wait()
+      end
+   end
 end
 
 local function recentsnipe(bool)
