@@ -8,7 +8,7 @@ local vu = game:GetService("VirtualUser")
 local TPService = game:GetService("TeleportService")
 local Workspace = game:GetService("Workspace")
 local player = game:WaitForChild("Players").LocalPlayer
-local character = player:GetCharacter()
+local character = player.Character
 local promOver = game.CoreGui.RobloxPromptGui:WaitForChild("promptOverlay")
 local Remotes = game.ReplicatedStorage:WaitForChild("Remotes")
 local RecentListings = Workspace.RecentListings.Board.SurfaceGui:WaitForChild("ScrollingFrame")
@@ -56,7 +56,7 @@ local function itemspawnesp(bool)
          for i = 1, #spawns do
             if spawns[i] ~= nil and spawns[i].Billboard == nil then
                local Billboard = Instance.new("BillboardGui")
-               Billboard.Parent = spawns[i]
+               Billboard.Parent = spawns[i].Handle
                local Text = Instance.new("TextLabel")
                Text.Parent = Billboard
                Text.BackgroundTransparency = 1
@@ -310,6 +310,15 @@ local delaySlider = Auto:CreateSlider({ --Game Delay
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 local Misc = Window:CreateTab("Misc") -- Title, Image
 
+local ItemESP = Misc:CreateToggle({ --Anti AFK
+	Name = "Item ESP",
+	CurrentValue = false,
+	Flag = "ItemESP", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
+	Callback = function(Value)
+		itemspawnesp(Value)
+	end,
+})
+
 local AntiAFK = Misc:CreateToggle({ --Anti AFK
 	Name = "Anti AFK",
 	CurrentValue = true,
@@ -325,6 +334,13 @@ local AutoRejoin = Misc:CreateToggle({ --Auto Rejoin
 	Flag = "AutoRejoin", -- A flag is the identifier for the configuration file, make sure every element has a different flag if you're using configuration saving to ensure no overlaps
 	Callback = function(Value)
 		autorejoin(Value)
+	end,
+})
+
+local Rejoin = Misc:CreateButton({ --Self Destruct
+	Name = "Rejoin",
+	Callback = function()
+		TPService:Teleport(game.PlaceId, player)
 	end,
 })
 
