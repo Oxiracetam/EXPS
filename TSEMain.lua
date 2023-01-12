@@ -54,7 +54,9 @@ local function itemspawnesp(bool)
 			local spawns = ItemSpawns:GetChildren()
 
 			for i = 1, #spawns do
-				if spawns[i] ~= nil and spawns[i].Handle:FindFirstChild("BillboardGui") == false then
+				if spawns[i].Handle:FindFirstChild("BillboardGui") == true then
+					break
+				elseif spawns[i] ~= nil then
 					warn("ITEM IS INSIDE WORKSPACE")
 					local Billboard = Instance.new("BillboardGui")
 					Billboard.Parent = spawns[i].Handle
@@ -65,7 +67,9 @@ local function itemspawnesp(bool)
 					Text.BackgroundTransparency = 1
 					Text.Size = UDim2.new(1, 0, 1, 0)
 					Text.TextColor3 = Color3.new(0, 255, 0)
-					Text.Text = "ITEM DROP"
+					Text.TextScaled = true
+					Text.RichText = true
+					Text.Text = "<b>ITEM DROP</b>"
 				end
 			end
 			task.wait()
