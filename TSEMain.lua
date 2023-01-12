@@ -59,7 +59,7 @@ local function itemspawnesp(bool)
 				elseif spawns[i] ~= nil then
 					warn("ITEM IS INSIDE WORKSPACE")
 					local Billboard = Instance.new("BillboardGui")
-					Billboard.Parent = spawns[i].Handle
+					Billboard.Parent = spawns[i]:WaitForChild("Handle")
 					Billboard.AlwaysOnTop = true
 					Billboard.Size = UDim2.new(3, 0, 3, 0)
 					local Text = Instance.new("TextLabel")
