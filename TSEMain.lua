@@ -49,23 +49,28 @@ local function autosnipe(bool)
 end
 
 local function itemspawnesp(bool)
-   if bool == true then
-      while bool do
-         local spawns = ItemSpawns:GetChildren()
+	if bool == true then
+		while bool do
+			local spawns = ItemSpawns:GetChildren()
 
-         for i = 1, #spawns do
-            if spawns[i] ~= nil and spawns[i].Billboard == nil then
-               local Billboard = Instance.new("BillboardGui")
-               Billboard.Parent = spawns[i].Handle
-               local Text = Instance.new("TextLabel")
-               Text.Parent = Billboard
-               Text.BackgroundTransparency = 1
-               Text.Text = "ITEM DROP"
-            end
-         end
-         task.wait()
-      end
-   end
+			for i = 1, #spawns do
+				if spawns[i] ~= nil and spawns[i].Handle:FindFirstChild("BillboardGui") == false then
+					warn("ITEM IS INSIDE WORKSPACE")
+					local Billboard = Instance.new("BillboardGui")
+					Billboard.Parent = spawns[i].Handle
+					Billboard.AlwaysOnTop = true
+					Billboard.Size = UDim2.new(3, 0, 3, 0)
+					local Text = Instance.new("TextLabel")
+					Text.Parent = Billboard
+					Text.BackgroundTransparency = 1
+					Text.Size = UDim2.new(1, 0, 1, 0)
+					Text.TextColor3 = Color3.new(0, 255, 0)
+					Text.Text = "ITEM DROP"
+				end
+			end
+			task.wait()
+		end
+	end
 end
 
 local function recentsnipe(bool)
